@@ -5,7 +5,7 @@ def create_project_structure(project_name, version):
     os.mkdir(project_name)
     os.chdir(project_name)
     with open('__init__.py', 'w') as f:
-        f.write('from ')
+        f.write('from .whlcode import hello_world')
     with open('whlcode.py', 'w') as f:
         f.write("def hello_world():\n    print('Hello,world!')")
     os.chdir('..')
