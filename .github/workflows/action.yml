@@ -1,7 +1,7 @@
 name: Create Project Structure
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       project_name:
         description: 'Project name'
