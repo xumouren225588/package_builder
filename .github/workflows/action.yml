@@ -1,0 +1,38 @@
+name: Create Project Structure
+
+on:
+  workflow_call:
+    inputs:
+      project_name:
+        description: 'Project name'
+        required: true
+        type: string
+      version:
+        description: 'Project version'
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Create project directory
+      run: |
+        python build.py ${{ inputs.project_name }} ${{ inputs.version }}
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add .
+        git commit -m "Create project structure for ${{ inputs.project_name }}"
+        git push
